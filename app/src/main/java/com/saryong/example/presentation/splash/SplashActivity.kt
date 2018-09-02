@@ -1,24 +1,31 @@
 package com.saryong.example.presentation.splash
 
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import com.saryong.example.R
+import com.saryong.example.R.layout
+import com.saryong.example.data.local.PredefinedConstantStorage
 import com.saryong.example.data.pref.Preferences
+import com.saryong.example.presentation.NavigationController
 import com.saryong.example.presentation.currencylist.MainActivity
-import kotlinx.android.synthetic.main.activity_splash.*
+import com.saryong.example.util.fastLazy
+import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.activity_splash.fullscreen_content
 import timber.log.Timber
 import java.lang.ref.WeakReference
+import javax.inject.Inject
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : DaggerAppCompatActivity() {
   private val hideHandler = Handler()
   private val hideRunnable = Runnable { hide() }
   private val hidePart2Runnable = Runnable {
@@ -35,12 +42,20 @@ class SplashActivity : AppCompatActivity() {
       View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
       View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
   }
+
+  private val viewModel by fastLazy {
+    ViewModelProviders.of(this, viewModelFactory).get(SplashViewModel::class.java)
+  }
+
+  @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+  @Inject lateinit var navigationController: NavigationController
+
   private var startupTask: StartupTask? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    setContentView(R.layout.activity_splash)
+    setContentView(layout.activity_splash)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     startupTask = StartupTask(WeakReference(this))
@@ -79,7 +94,6 @@ class SplashActivity : AppCompatActivity() {
       Thread.sleep(HIDE_DELAY + UI_ANIMATION_DELAY) // this is unnecessary in 'real' project
 
       if (Preferences.firstLaunch) {
-
 
 //        Preferences.firstLaunch = false
       }

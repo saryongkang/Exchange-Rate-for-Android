@@ -11,7 +11,6 @@ enum class UpdateStatus(val rawValue: Int) {
 data class Currency(
   val code: String,
   val name: String,
-  val country: String,
   val exchangedAmount: Double = 0.0,
   val updatedAt: LocalDateTime = LocalDateTime.now(),
   val status: UpdateStatus = UpdateStatus.LOADING
