@@ -17,21 +17,13 @@ enum class UpdateStatus(val rawValue: Int) {
   }
 }
 
-data class Currency(
+data class CurrencyItem(
   val code: String,
   val name: String,
-  val exchangedAmount: Double = 0.0,
+  val exchangedAmount: String = "0.0",
   val updatedAt: LocalDateTime = LocalDateTime.now(),
   val status: UpdateStatus = UpdateStatus.LOADING
-)
-
-//class CurrencyItem(
-//  private val currency: Currency
-//) : BindableItem<ItemCurrencyBinding>(currency.hashCode().toLong()) {
-//
-//  override fun bind(viewBinding: ItemCurrencyBinding, position: Int) {
-//    viewBinding.currency = currency
-//  }
-//
-//  override fun getLayout(): Int = R.layout.item_currency
-//}
+) {
+  val imagePath: String
+    get() = code.toLowerCase() + ".png"
+}

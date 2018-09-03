@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.saryong.example.presentation.currencylist.CurrencyListAdapter.ViewHolder
 import com.saryong.example.databinding.ItemCurrencyBinding
-import com.saryong.example.presentation.currencylist.item.Currency
+import com.saryong.example.presentation.currencylist.item.CurrencyItem
 
 class CurrencyListAdapter : RecyclerView.Adapter<ViewHolder>() {
-  var itemList = listOf<Currency>()
+  var itemList = listOf<CurrencyItem>()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val binding = ItemCurrencyBinding.inflate(LayoutInflater.from(parent.context), parent, false)

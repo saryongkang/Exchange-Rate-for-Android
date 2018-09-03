@@ -1,6 +1,7 @@
 package com.saryong.example.di
 
 import com.saryong.example.App
+import com.saryong.example.di.activitymodule.MainActivityBuilder
 import com.saryong.example.di.activitymodule.SplashActivityBuilder
 import dagger.BindsInstance
 import dagger.Component
@@ -15,7 +16,8 @@ import javax.inject.Singleton
   NetworkModule::class,
   ViewModelModule::class,
 
-  SplashActivityBuilder::class
+  SplashActivityBuilder::class,
+  MainActivityBuilder::class
 ])
 
 interface AppComponent : AndroidInjector<App> {

@@ -1,27 +1,29 @@
 package com.saryong.example.presentation.currencylist
 
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.saryong.example.R
 import com.saryong.example.databinding.ActivityMainBinding
+import com.saryong.example.presentation.NavigationController
 import com.saryong.example.util.fastLazy
+import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
+  @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+  @Inject lateinit var navigationController: NavigationController
+  
   private val binding: ActivityMainBinding by fastLazy {
     DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
   }
 
   private val viewModel by fastLazy {
-//    ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
-    MainViewModel()
+    ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
   }
-
-  // FIXME
-//  private lateinit var viewModelFactory: ViewModelProvider.Factory
-
+  
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 

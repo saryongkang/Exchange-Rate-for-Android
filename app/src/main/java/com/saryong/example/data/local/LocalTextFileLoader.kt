@@ -1,7 +1,7 @@
 package com.saryong.example.data.local
 
 import android.content.Context
-import com.saryong.example.data.api.json.mapper.defaultKotshiListAdapter
+import com.saryong.example.data.api.response.mapper.defaultKotshiListAdapter
 import timber.log.Timber
 import java.io.IOException
 

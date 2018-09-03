@@ -1,11 +1,9 @@
 package com.saryong.example.data.model
 
-import com.saryong.example.presentation.currencylist.item.Currency
+import com.saryong.example.presentation.currencylist.item.CurrencyItem
 import com.saryong.example.presentation.currencylist.item.UpdateStatus
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneOffset
 
 // TODO move to somewhere
 //fun getSystemZoneOffset(): ZoneOffset =
@@ -22,10 +20,10 @@ open class CurrencyModel : RealmObject() {
   var status: Int = UpdateStatus.LOADING.rawValue
   
   fun toViewEntity() =
-    Currency(
+    CurrencyItem(
       code = code,
       name = name,
-      exchangedAmount = exchangedAmount,
+      exchangedAmount = exchangedAmount.toString(),
 //      updatedAt = LocalDateTime.ofEpochSecond(updatedAt, 0, getSystemZoneOffset()),
       status = UpdateStatus.valueOf(status)
     )

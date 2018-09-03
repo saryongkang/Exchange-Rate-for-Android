@@ -1,11 +1,10 @@
 package com.saryong.example.presentation.currencylist.item
 
 import android.support.v7.util.DiffUtil
-import com.saryong.example.presentation.currencylist.item.Currency
 
 class DiffCallback(
-  private val oldList: List<Currency>,
-  private val newList: List<Currency>
+  private val oldList: List<CurrencyItem>,
+  private val newList: List<CurrencyItem>
 ) : DiffUtil.Callback() {
   override fun getOldListSize(): Int = oldList.size
 

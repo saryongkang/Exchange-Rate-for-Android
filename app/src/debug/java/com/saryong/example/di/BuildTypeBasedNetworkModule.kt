@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Module
 internal class BuildTypeBasedNetworkModule {
-  @Singleton @Provides
+  @NetworkLogger @Singleton @Provides
   fun provideNetworkLogger(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
   }

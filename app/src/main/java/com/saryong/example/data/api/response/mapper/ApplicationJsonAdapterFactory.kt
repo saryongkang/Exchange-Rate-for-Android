@@ -1,4 +1,4 @@
-package com.saryong.example.data.api.json.mapper
+package com.saryong.example.data.api.response.mapper
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -8,7 +8,8 @@ import se.ansman.kotshi.KotshiJsonAdapterFactory
 @KotshiJsonAdapterFactory
 abstract class ApplicationJsonAdapterFactory : JsonAdapter.Factory {
   companion object {
-    val INSTANCE: ApplicationJsonAdapterFactory = KotshiApplicationJsonAdapterFactory()
+    val INSTANCE: ApplicationJsonAdapterFactory =
+      KotshiApplicationJsonAdapterFactory()
   }
 }
 

@@ -14,7 +14,6 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import timber.log.Timber
 
 @SuppressLint("Registered")
 open class App : DaggerApplication() {
@@ -55,6 +54,9 @@ open class App : DaggerApplication() {
   
   // TODO: move this to Splash screen
   private fun initGlobal() {
+    // FIXME TEMP
+    Preferences.firstLaunch = true
+    
     if (Preferences.firstLaunch) {
       fillDefaultData()
 
@@ -66,13 +68,21 @@ open class App : DaggerApplication() {
     val storage = PredefinedConstantDataStorage(this)
     val baseCurrency = Preferences.baseCurrency
     
+    val currencyList = mutableListOf<String>()
     val realmDb = Realm.getDefaultInstance()
+    
     realmDb.executeTransaction { realm ->
-      storage.currencies.filter { it.code != baseCurrency }.sortedBy { it.order }.take(10).forEach { currency ->
-        realm.createObject(CurrencyModel::class.java, currency.code).run {
-          name = currency.name
+      realm.deleteAll()
+
+      storage.currencies.filter { it.code != baseCurrency }.sortedBy { it.order }.take(10)
+        .forEach { currency ->
+          realm.createObject(CurrencyModel::class.java, currency.code).run {
+            name = currency.name
+          }
+          currencyList.add(currency.code)
         }
-      }
     }
+    
+    Preferences.selectedCurrencies.addAll(currencyList)
   }
 }

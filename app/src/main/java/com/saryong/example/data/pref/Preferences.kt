@@ -7,4 +7,5 @@ object Preferences : KotprefModel() {
 
   var firstLaunch by booleanPref(true)
   var baseCurrency by stringPref("EUR")
+  val selectedCurrencies by stringSetPref(emptySet())
 }

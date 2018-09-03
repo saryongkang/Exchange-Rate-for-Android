@@ -2,8 +2,11 @@ package com.saryong.example.di
 
 import android.content.Context
 import com.saryong.example.App
+import com.saryong.example.data.api.AlphaVantageApi
 import com.saryong.example.data.local.PredefinedConstantDataStorage
 import com.saryong.example.data.local.PredefinedConstantStorage
+import com.saryong.example.data.repository.ExchangeRateDataRepository
+import com.saryong.example.data.repository.ExchangeRateRepository
 import com.saryong.example.util.rx.AppSchedulerProvider
 import com.saryong.example.util.rx.SchedulerProvider
 import dagger.Module
@@ -21,4 +24,11 @@ internal object AppModule {
   @Singleton @Provides @JvmStatic
   fun providePredefinedConstantStorage(context: Context): PredefinedConstantStorage =
     PredefinedConstantDataStorage(context)
+  
+  @Singleton @Provides @JvmStatic
+  fun provideExchangeRateRepository(
+    exchangeApi: AlphaVantageApi,
+    schedulerProvider: SchedulerProvider
+  ) : ExchangeRateRepository =
+    ExchangeRateDataRepository(exchangeApi, schedulerProvider)
 }

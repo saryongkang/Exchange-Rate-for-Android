@@ -26,6 +26,9 @@ import javax.inject.Inject
  * status bar and navigation/system bar) with user interaction.
  */
 class SplashActivity : DaggerAppCompatActivity() {
+  @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+  @Inject lateinit var navigationController: NavigationController
+  
   private val hideHandler = Handler()
   private val hideRunnable = Runnable { hide() }
   private val hidePart2Runnable = Runnable {
@@ -46,9 +49,6 @@ class SplashActivity : DaggerAppCompatActivity() {
   private val viewModel by fastLazy {
     ViewModelProviders.of(this, viewModelFactory).get(SplashViewModel::class.java)
   }
-
-  @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-  @Inject lateinit var navigationController: NavigationController
 
   private var startupTask: StartupTask? = null
 
