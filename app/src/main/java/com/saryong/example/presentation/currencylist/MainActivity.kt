@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     setSupportActionBar(binding.toolbar)
 
+    binding.setLifecycleOwner(this)
     binding.viewModel = viewModel
     binding.recyclerViewCurrencyList.adapter = CurrencyListAdapter()
   }
