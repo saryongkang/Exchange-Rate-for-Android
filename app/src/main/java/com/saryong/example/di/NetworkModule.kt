@@ -25,7 +25,7 @@ open class NetworkModule {
   }
   
   @RetrofitAlphaVantage @Singleton @Provides
-  fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+  fun provideOkHttpClient(@NetworkLogger loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
     OkHttpClient.Builder()
       .addNetworkInterceptor(loggingInterceptor)
       .build()
