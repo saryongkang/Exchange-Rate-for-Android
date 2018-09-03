@@ -6,6 +6,8 @@ import timber.log.Timber
 import java.io.IOException
 
 object LocalTextFileLoader {
+  const val defaultJsonFolder = "json/"
+  
   @Throws(IOException::class)
   fun load(context: Context, filename: String): String {
     val file = context.assets.open(filename)
@@ -18,7 +20,7 @@ object LocalTextFileLoader {
   inline fun <reified E : Any> loadJsonList(context: Context, filename: String): List<E> {
     val jsonAdapter = defaultKotshiListAdapter<E>()
     return try {
-      val jsonText = LocalTextFileLoader.load(context, filename)
+      val jsonText = LocalTextFileLoader.load(context, defaultJsonFolder + filename)
       jsonAdapter.fromJson(jsonText) ?: throw IOException("Failed to load json file: [$filename]")
     } catch (e: IOException) {
       Timber.e(e.localizedMessage)

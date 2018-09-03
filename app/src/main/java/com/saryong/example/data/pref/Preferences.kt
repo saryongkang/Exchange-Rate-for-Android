@@ -6,4 +6,5 @@ object Preferences : KotprefModel() {
   override val kotprefName: String = "example_prefs"
 
   var firstLaunch by booleanPref(true)
+  var baseCurrency by stringPref("EUR")
 }

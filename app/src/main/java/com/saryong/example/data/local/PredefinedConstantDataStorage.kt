@@ -10,15 +10,12 @@ class PredefinedConstantDataStorage @Inject constructor(
 
   override val currencies: List<CurrencySetting> by fastLazy { loadCurrencies() }
 
-  private fun loadCurrencies() = context.loadCurrencies(CURRENCIES_FILENAME)
+  private fun loadCurrencies() = context.loadJsonList<CurrencySetting>(CURRENCIES_FILENAME)
 
   companion object {
-    const val CURRENCIES_FILENAME = "availability.json"
+    const val CURRENCIES_FILENAME = "currencies.json"
   }
 }
 
 inline fun <reified E : Any> Context.loadJsonList(filename: String) =
   LocalTextFileLoader.loadJsonList<E>(this, filename)
-
-fun Context.loadCurrencies(filename: String) =
-  LocalTextFileLoader.loadJsonList<CurrencySetting>(this, filename)

@@ -6,6 +6,15 @@ enum class UpdateStatus(val rawValue: Int) {
   LOADING(0),
   SUCCESS(1),
   FAILED(-1);
+  
+  companion object {
+    fun valueOf(value: Int) =
+      when (value) {
+        0 -> LOADING
+        1 -> SUCCESS
+        else -> FAILED
+      }
+  }
 }
 
 data class Currency(

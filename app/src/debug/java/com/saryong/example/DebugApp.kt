@@ -7,8 +7,10 @@ import timber.log.Timber
 @SuppressLint("Registered")
 class DebugApp : App() {
   override fun onCreate() {
-    super.onCreate()
     setupTimber()
+
+    super.onCreate()
+
     setupLeakCanary()
   }
 
