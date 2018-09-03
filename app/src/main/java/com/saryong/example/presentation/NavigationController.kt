@@ -21,6 +21,11 @@ class NavigationController @Inject constructor(
     activity.startActivity(intent)
   }
 
+  fun navigateToAddCurrencyActivity() {
+    val intent = Intent(activity, AddCurrencyActivity::class.java)
+    activity.startActivity(intent)
+  }
+
   private fun replaceFragment(fragment: Fragment) {
     fragmentManager
       .beginTransaction()

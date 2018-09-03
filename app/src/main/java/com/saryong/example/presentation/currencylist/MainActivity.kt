@@ -36,8 +36,7 @@ class MainActivity : DaggerAppCompatActivity() {
     binding.recyclerViewCurrencyList.adapter = CurrencyListAdapter()
 
     binding.fab.setOnClickListener {
-      val intent = Intent(this, AddCurrencyActivity::class.java)
-      startActivity(intent)
+      navigationController.navigateToAddCurrencyActivity()
     }
   }
 
