@@ -1,6 +1,7 @@
 package com.saryong.example.di
 
 import com.saryong.example.App
+import com.saryong.example.di.activitymodule.AddCurrencyActivityBuilder
 import com.saryong.example.di.activitymodule.MainActivityBuilder
 import com.saryong.example.di.activitymodule.SplashActivityBuilder
 import dagger.BindsInstance
@@ -17,7 +18,8 @@ import javax.inject.Singleton
   ViewModelModule::class,
 
   SplashActivityBuilder::class,
-  MainActivityBuilder::class
+  MainActivityBuilder::class,
+  AddCurrencyActivityBuilder::class
 ])
 
 interface AppComponent : AndroidInjector<App> {

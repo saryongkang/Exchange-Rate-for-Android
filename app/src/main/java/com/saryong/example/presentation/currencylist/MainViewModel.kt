@@ -63,14 +63,14 @@ class MainViewModel @Inject constructor(
 //    }
     
     // change in async way
-    val realmDb = Realm.getDefaultInstance()
-    realmDb.executeTransaction { realm ->
-      val currency = realm.where<CurrencyModel>().equalTo("code", "GBP").findFirst()
-      currency?.let {
-        it.exchangedAmount += 1.0
-      }
-    }
-    
-    Timber.d(currencyList.value.toString())
+//    val realmDb = Realm.getDefaultInstance()
+//    realmDb.executeTransaction { realm ->
+//      val currency = realm.where<CurrencyModel>().equalTo("code", "GBP").findFirst()
+//      currency?.let {
+//        it.exchangedAmount += 1.0
+//      }
+//    }
+//
+//    Timber.d(currencyList.value.toString())
   }
 }

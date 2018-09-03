@@ -55,7 +55,7 @@ open class App : DaggerApplication() {
   // TODO: move this to Splash screen
   private fun initGlobal() {
     // FIXME TEMP
-    Preferences.firstLaunch = true
+//    Preferences.firstLaunch = true
     
     if (Preferences.firstLaunch) {
       fillDefaultData()

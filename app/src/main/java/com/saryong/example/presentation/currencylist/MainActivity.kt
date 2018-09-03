@@ -2,11 +2,13 @@ package com.saryong.example.presentation.currencylist
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.saryong.example.R
 import com.saryong.example.databinding.ActivityMainBinding
 import com.saryong.example.presentation.NavigationController
+import com.saryong.example.presentation.addcurrency.AddCurrencyActivity
 import com.saryong.example.util.fastLazy
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
@@ -32,6 +34,11 @@ class MainActivity : DaggerAppCompatActivity() {
     binding.setLifecycleOwner(this)
     binding.viewModel = viewModel
     binding.recyclerViewCurrencyList.adapter = CurrencyListAdapter()
+
+    binding.fab.setOnClickListener {
+      val intent = Intent(this, AddCurrencyActivity::class.java)
+      startActivity(intent)
+    }
   }
 
 //  override fun onCreateOptionsMenu(menu: Menu): Boolean {
