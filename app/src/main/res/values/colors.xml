@@ -7,4 +7,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="recents_background">#B88E0F</color>
+
 </resources>

@@ -11,6 +11,9 @@ import com.saryong.example.presentation.common.Findable
 import com.saryong.example.presentation.currencydetail.CurrencyDetailActivity
 import javax.inject.Inject
 
+const val EXTRA_KEY_CURRENCY_CODE = "EXTRA_KEY_CURRENCY_CODE"
+const val REQUEST_CODE_ADD_CURRENCY = 0x0001
+
 class NavigationController @Inject constructor(
   private val activity: AppCompatActivity
 ) {
@@ -39,10 +42,5 @@ class NavigationController @Inject constructor(
       .beginTransaction()
       .replace(containerId, fragment, (fragment as? Findable)?.tagForFinding)
       .commitAllowingStateLoss()
-  }
-  
-  companion object {
-    const val EXTRA_KEY_CURRENCY_CODE = "EXTRA_KEY_CURRENCY_CODE"
-    const val REQUEST_CODE_ADD_CURRENCY = 0x0001
   }
 }

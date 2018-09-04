@@ -9,6 +9,7 @@ import android.os.Bundle
 import com.saryong.example.R
 import com.saryong.example.databinding.ActivityCurrencyListBinding
 import com.saryong.example.presentation.NavigationController
+import com.saryong.example.presentation.REQUEST_CODE_ADD_CURRENCY
 import com.saryong.example.util.fastLazy
 import com.saryong.example.util.livedata.EventObserver
 import dagger.android.support.DaggerAppCompatActivity
@@ -48,7 +49,7 @@ class CurrencyListActivity : DaggerAppCompatActivity() {
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     
-    if (resultCode == Activity.RESULT_OK && requestCode == NavigationController.REQUEST_CODE_ADD_CURRENCY) {
+    if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_ADD_CURRENCY) {
       Timber.d(data?.getStringExtra(EXTRA_KEY_CURRENCY_CODE))
       data?.getStringExtra(EXTRA_KEY_CURRENCY_CODE)?.let { currencyCode ->
         viewModel.addCurrency(currencyCode)

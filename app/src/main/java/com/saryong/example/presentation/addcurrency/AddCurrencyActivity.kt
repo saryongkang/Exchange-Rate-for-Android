@@ -10,13 +10,13 @@ import com.saryong.example.databinding.ActivityAddCurrencyBinding
 import com.saryong.example.presentation.NavigationController
 import com.saryong.example.util.fastLazy
 import com.saryong.example.util.livedata.EventObserver
-import dagger.android.support.DaggerAppCompatActivity
+import com.saryong.example.presentation.common.BaseActivity
 import javax.inject.Inject
 import android.content.Intent
 import com.saryong.example.presentation.currencylist.CurrencyListActivity
 
 
-class AddCurrencyActivity : DaggerAppCompatActivity() {
+class AddCurrencyActivity : BaseActivity() {
   @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
   private val binding: ActivityAddCurrencyBinding by fastLazy {

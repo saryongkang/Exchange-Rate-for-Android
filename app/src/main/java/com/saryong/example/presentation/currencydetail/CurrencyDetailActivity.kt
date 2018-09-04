@@ -8,6 +8,7 @@ import com.saryong.example.data.local.PredefinedConstantStorage
 import com.saryong.example.data.pref.Preferences
 import com.saryong.example.databinding.ActivityCurrencyDetailBinding
 import com.saryong.example.presentation.NavigationController
+import com.saryong.example.presentation.EXTRA_KEY_CURRENCY_CODE
 import com.saryong.example.util.fastLazy
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
@@ -25,7 +26,7 @@ class CurrencyDetailActivity : DaggerAppCompatActivity() {
     super.onCreate(savedInstanceState)
     setSupportActionBar(binding.toolbar)
   
-    val targetCode = intent.getStringExtra(NavigationController.EXTRA_KEY_CURRENCY_CODE)
+    val targetCode = intent.getStringExtra(EXTRA_KEY_CURRENCY_CODE)
     val sourceCode = Preferences.baseCurrency
     val currencies = predefinedConstantStorage.currencies
     val sourceCurrency = currencies.find { it.code == sourceCode }
