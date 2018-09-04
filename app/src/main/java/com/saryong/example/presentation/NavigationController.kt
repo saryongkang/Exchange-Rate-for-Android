@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.saryong.example.R
+import com.saryong.example.presentation.addcurrency.AddCurrencyActivity
 import com.saryong.example.presentation.currencylist.MainActivity
 import com.saryong.example.presentation.common.Findable
 import javax.inject.Inject

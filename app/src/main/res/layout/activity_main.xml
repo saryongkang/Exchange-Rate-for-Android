@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:currencyList="@{viewModel.currencyList}"
+            bind:currencyList="@{viewModel.currencyList}"
             tools:listitem="@layout/item_currency"
             />
 

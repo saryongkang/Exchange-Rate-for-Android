@@ -6,7 +6,7 @@
     <data>
         <variable
             name="currency"
-            type="com.saryong.example.presentation.currencylist.item.CurrencyItem" />
+            type="com.saryong.example.data.local.CurrencySetting" />
     </data>
 
     <android.support.constraint.ConstraintLayout

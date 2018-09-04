@@ -21,7 +21,7 @@ class AddCurrencyActivity : DaggerAppCompatActivity() {
   }
 
   private val viewModel by fastLazy {
-    ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+    ViewModelProviders.of(this, viewModelFactory).get(AddCurrencyViewModel::class.java)
   }
 
 
@@ -32,6 +32,6 @@ class AddCurrencyActivity : DaggerAppCompatActivity() {
 
     binding.setLifecycleOwner(this)
     binding.viewModel = viewModel
-    binding.newCurrenciesRecyclerView.adapter
+    binding.newCurrenciesRecyclerView.adapter = SimpleCurrencyListAdapter()
   }
 }
