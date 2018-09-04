@@ -16,7 +16,7 @@ import javax.inject.Singleton
   ViewModelModule::class,
 
   SplashActivityBuilder::class,
-  MainActivityBuilder::class,
+  CurrencyListActivityBuilder::class,
   AddCurrencyActivityBuilder::class,
   CurrencyDetailActivityBuilder::class
 ])

@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.currencylist.MainActivityFragment"
-    tools:showIn="@layout/activity_main"
+    tools:context=".presentation.currencylist.CurrencyListFragment"
+    tools:showIn="@layout/activity_currency_list"
     >
 
     <TextView

@@ -6,8 +6,9 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.saryong.example.R
 import com.saryong.example.presentation.addcurrency.AddCurrencyActivity
-import com.saryong.example.presentation.currencylist.MainActivity
+import com.saryong.example.presentation.currencylist.CurrencyListActivity
 import com.saryong.example.presentation.common.Findable
+import com.saryong.example.presentation.currencydetail.CurrencyDetailActivity
 import javax.inject.Inject
 
 class NavigationController @Inject constructor(
@@ -16,19 +17,21 @@ class NavigationController @Inject constructor(
   private val containerId = R.id.container
   private val fragmentManager: FragmentManager = activity.supportFragmentManager
 
-  fun navigateToMainActivity() {
-    val intent = Intent(activity, MainActivity::class.java)
+  fun navigateToCurrencyListActivity() {
+    val intent = Intent(activity, CurrencyListActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
     activity.startActivity(intent)
   }
 
   fun navigateToAddCurrencyActivity() {
     val intent = Intent(activity.applicationContext, AddCurrencyActivity::class.java)
-    activity.startActivityForResult(intent, ADD_CURRENCY_REQUEST_CODE)
+    activity.startActivityForResult(intent, REQUEST_CODE_ADD_CURRENCY)
   }
   
-  fun navigateToDetailActivity() {
-    
+  fun navigateToDetailActivity(currencyCode: String) {
+    val intent = Intent(activity, CurrencyDetailActivity::class.java)
+    intent.putExtra(EXTRA_KEY_CURRENCY_CODE, currencyCode)
+    activity.startActivity(intent)
   }
 
   private fun replaceFragment(fragment: Fragment) {
@@ -39,6 +42,7 @@ class NavigationController @Inject constructor(
   }
   
   companion object {
-    const val ADD_CURRENCY_REQUEST_CODE = 0x0001
+    const val EXTRA_KEY_CURRENCY_CODE = "EXTRA_KEY_CURRENCY_CODE"
+    const val REQUEST_CODE_ADD_CURRENCY = 0x0001
   }
 }

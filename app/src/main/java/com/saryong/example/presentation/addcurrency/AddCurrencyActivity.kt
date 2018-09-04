@@ -13,12 +13,11 @@ import com.saryong.example.util.livedata.EventObserver
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import android.content.Intent
-import com.saryong.example.presentation.currencylist.MainActivity
+import com.saryong.example.presentation.currencylist.CurrencyListActivity
 
 
 class AddCurrencyActivity : DaggerAppCompatActivity() {
   @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-  @Inject lateinit var navigationController: NavigationController
 
   private val binding: ActivityAddCurrencyBinding by fastLazy {
     DataBindingUtil.setContentView<ActivityAddCurrencyBinding>(this, R.layout.activity_add_currency)
@@ -37,9 +36,9 @@ class AddCurrencyActivity : DaggerAppCompatActivity() {
     binding.viewModel = viewModel
     binding.newCurrenciesRecyclerView.adapter = SimpleCurrencyListAdapter(viewModel)
     
-    viewModel.finishWithCurrency.observe(this, EventObserver {
+    viewModel.finishWithCurrencyAction.observe(this, EventObserver {
       val intent = Intent()
-      intent.putExtra(MainActivity.RESULT_KEY, it)
+      intent.putExtra(CurrencyListActivity.EXTRA_KEY_CURRENCY_CODE, it)
       setResult(Activity.RESULT_OK, intent)
       
       finish()

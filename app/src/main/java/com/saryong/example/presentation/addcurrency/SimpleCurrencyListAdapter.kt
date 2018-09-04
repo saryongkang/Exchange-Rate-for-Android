@@ -7,7 +7,7 @@ import com.saryong.example.data.local.CurrencySetting
 import com.saryong.example.presentation.addcurrency.SimpleCurrencyListAdapter.ViewHolder
 import com.saryong.example.databinding.ItemSimpleCurrencyBinding
 
-class SimpleCurrencyListAdapter(private val parentViewModel: AddCurrencyViewModel) : RecyclerView.Adapter<ViewHolder>() {
+class SimpleCurrencyListAdapter(private val eventListener: CurrencySettingEventListener) : RecyclerView.Adapter<ViewHolder>() {
   var itemList = listOf<CurrencySetting>()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,7 +19,7 @@ class SimpleCurrencyListAdapter(private val parentViewModel: AddCurrencyViewMode
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.binding.currency = itemList[position]
-    holder.binding.parentViewModel = parentViewModel
+    holder.binding.eventListener = eventListener
   }
 
   class ViewHolder(val binding: ItemSimpleCurrencyBinding) : RecyclerView.ViewHolder(binding.root)

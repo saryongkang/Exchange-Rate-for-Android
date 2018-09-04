@@ -8,12 +8,10 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import com.saryong.example.R
 import com.saryong.example.R.layout
-import com.saryong.example.data.local.PredefinedConstantStorage
 import com.saryong.example.data.pref.Preferences
 import com.saryong.example.presentation.NavigationController
-import com.saryong.example.presentation.currencylist.MainActivity
+import com.saryong.example.presentation.currencylist.CurrencyListActivity
 import com.saryong.example.util.fastLazy
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_splash.fullscreen_content
@@ -106,7 +104,7 @@ class SplashActivity : DaggerAppCompatActivity() {
 
         context.get()?.let {
           // Navigate to Main Activity
-          val intent = Intent(it, MainActivity::class.java)
+          val intent = Intent(it, CurrencyListActivity::class.java)
           intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
           it.startActivity(intent)
         }

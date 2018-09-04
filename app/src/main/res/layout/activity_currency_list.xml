@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.currencylist.MainActivity"
+    tools:context=".presentation.currencylist.CurrencyListActivity"
     >
     <data>
         <variable
             name="viewModel"
-            type="com.saryong.example.presentation.currencylist.MainViewModel" />
+            type="com.saryong.example.presentation.currencylist.CurrencyListViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout

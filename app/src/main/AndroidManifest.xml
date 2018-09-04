@@ -14,7 +14,7 @@
     android:theme="@style/AppTheme">
 
     <activity
-      android:name=".presentation.currencylist.MainActivity"
+      android:name=".presentation.currencylist.CurrencyListActivity"
       android:label="@string/app_name"
       android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
@@ -32,20 +32,19 @@
 
     <activity
       android:name=".presentation.addcurrency.AddCurrencyActivity"
-      android:parentActivityName=".presentation.currencylist.MainActivity">
+      android:parentActivityName=".presentation.currencylist.CurrencyListActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
-        android:value=".presentation.currencylist.MainActivity" />
+        android:value=".presentation.currencylist.CurrencyListActivity" />
     </activity>
 
     <activity
       android:name=".presentation.currencydetail.CurrencyDetailActivity"
-      android:label="@string/title_activity_currency_detail"
       android:theme="@style/AppTheme.NoActionBar"
-      android:parentActivityName=".presentation.currencylist.MainActivity">
+      android:parentActivityName=".presentation.currencylist.CurrencyListActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
-        android:value=".presentation.currencylist.MainActivity" />
+        android:value=".presentation.currencylist.CurrencyListActivity" />
     </activity>
   </application>
 

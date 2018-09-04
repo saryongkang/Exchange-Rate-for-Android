@@ -7,5 +7,5 @@ import dagger.android.ContributesAndroidInjector
 @Module
 interface CurrencyDetailActivityBuilder {
   @ContributesAndroidInjector(modules = [CurrencyDetailActivityModule::class])
-  fun contributeCurrencyDetailActivity(): CurrencyDetailActivity
+  fun contributeActivity(): CurrencyDetailActivity
 }

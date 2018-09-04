@@ -5,8 +5,9 @@
 
   <data>
     <variable
-      name="parentViewModel"
-      type="com.saryong.example.presentation.addcurrency.AddCurrencyViewModel" />
+      name="eventListener"
+      type="com.saryong.example.presentation.addcurrency.CurrencySettingEventListener" />
+
     <variable
       name="currency"
       type="com.saryong.example.data.local.CurrencySetting" />
@@ -15,7 +16,7 @@
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/simple_currency_item_height"
-    android:onClick="@{() -> parentViewModel.onClickItem(currency)}">
+    android:onClick="@{() -> eventListener.onSelect(currency)}">
 
     <ImageView
       android:id="@+id/flagImageView"

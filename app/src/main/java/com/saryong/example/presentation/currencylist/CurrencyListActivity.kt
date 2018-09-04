@@ -7,7 +7,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.saryong.example.R
-import com.saryong.example.databinding.ActivityMainBinding
+import com.saryong.example.databinding.ActivityCurrencyListBinding
 import com.saryong.example.presentation.NavigationController
 import com.saryong.example.util.fastLazy
 import com.saryong.example.util.livedata.EventObserver
@@ -15,16 +15,16 @@ import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity() {
+class CurrencyListActivity : DaggerAppCompatActivity() {
   @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
   @Inject lateinit var navigationController: NavigationController
   
-  private val binding: ActivityMainBinding by fastLazy {
-    DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+  private val binding: ActivityCurrencyListBinding by fastLazy {
+    DataBindingUtil.setContentView<ActivityCurrencyListBinding>(this, R.layout.activity_currency_list)
   }
 
   private val viewModel by fastLazy {
-    ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+    ViewModelProviders.of(this, viewModelFactory).get(CurrencyListViewModel::class.java)
   }
   
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,23 +34,23 @@ class MainActivity : DaggerAppCompatActivity() {
 
     binding.setLifecycleOwner(this)
     binding.viewModel = viewModel
-    binding.recyclerViewCurrencyList.adapter = CurrencyListAdapter()
+    binding.recyclerViewCurrencyList.adapter = CurrencyListAdapter(viewModel)
 
     binding.fab.setOnClickListener {
       navigationController.navigateToAddCurrencyActivity()
     }
     
-    viewModel.navigateToDetailActivity.observe(this, EventObserver {
-      navigationController.navigateToDetailActivity()
+    viewModel.navigateToDetailAction.observe(this, EventObserver {
+      navigationController.navigateToDetailActivity(it)
     })
   }
   
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
     
-    if (resultCode == Activity.RESULT_OK && requestCode == NavigationController.ADD_CURRENCY_REQUEST_CODE) {
-      Timber.d(data?.getStringExtra(RESULT_KEY))
-      data?.getStringExtra(RESULT_KEY)?.let { currencyCode ->
+    if (resultCode == Activity.RESULT_OK && requestCode == NavigationController.REQUEST_CODE_ADD_CURRENCY) {
+      Timber.d(data?.getStringExtra(EXTRA_KEY_CURRENCY_CODE))
+      data?.getStringExtra(EXTRA_KEY_CURRENCY_CODE)?.let { currencyCode ->
         viewModel.addCurrency(currencyCode)
       }
     }
@@ -73,6 +73,6 @@ class MainActivity : DaggerAppCompatActivity() {
 //  }
   
   companion object {
-    const val RESULT_KEY = "currency_code"
+    const val EXTRA_KEY_CURRENCY_CODE = "EXTRA_KEY_CURRENCY_CODE"
   }
 }

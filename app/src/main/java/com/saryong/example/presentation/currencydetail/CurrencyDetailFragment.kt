@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.saryong.example.R
+import javax.inject.Inject
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class CurrencyDetailFragment : Fragment() {
+class CurrencyDetailFragment @Inject constructor(
+
+) : Fragment() {
   
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
     return inflater.inflate(R.layout.fragment_currency_detail, container, false)
   }
 }

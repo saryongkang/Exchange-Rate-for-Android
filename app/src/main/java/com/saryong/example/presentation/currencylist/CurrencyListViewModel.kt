@@ -2,31 +2,29 @@ package com.saryong.example.presentation.currencylist
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.preference.Preference
-import com.saryong.example.data.local.PredefinedConstantDataStorage
+import com.saryong.example.data.local.PredefinedConstantStorage
 import com.saryong.example.data.model.CurrencyModel
 import com.saryong.example.data.pref.Preferences
 import com.saryong.example.data.repository.ExchangeRateRepository
 import com.saryong.example.presentation.common.BaseViewModel
 import com.saryong.example.presentation.currencylist.item.CurrencyItem
 import com.saryong.example.util.livedata.Event
-import com.saryong.example.util.livedata.MutableListLiveData
 import com.saryong.example.util.rx.toLiveData
 import io.realm.Realm
 import io.realm.kotlin.where
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
-  private val predefinedConstantDataStorage: PredefinedConstantDataStorage,
+class CurrencyListViewModel @Inject constructor(
+  private val predefinedConstantStorage: PredefinedConstantStorage,
   private val exchangeRateRepository: ExchangeRateRepository
-): BaseViewModel() {
+): BaseViewModel(), CurrencyListEventListener {
   
   val currencyList: LiveData<List<CurrencyItem>>
   
-  private val _navigateToDetailActivity = MutableLiveData<Event<Unit>>()
-  val navigateToDetailActivity: LiveData<Event<Unit>>
-    get() = _navigateToDetailActivity
+  private val _navigateToDetailAction = MutableLiveData<Event<String>>()
+  val navigateToDetailAction: LiveData<Event<String>>
+    get() = _navigateToDetailAction
 
   init {
     // manual add
@@ -52,7 +50,7 @@ class MainViewModel @Inject constructor(
   }
   
   fun addCurrency(currencyCode: String) {
-    val currencySetting = predefinedConstantDataStorage.currencies.find { it.code == currencyCode }
+    val currencySetting = predefinedConstantStorage.currencies.find { it.code == currencyCode }
     if (currencySetting == null) {
       Timber.e("Couldn't find setting for $currencyCode from PredefinedConstantStorage!")
       return
@@ -101,4 +99,12 @@ class MainViewModel @Inject constructor(
 //
 //    Timber.d(currencyList.value.toString())
   }
+  
+  override fun onSelect(currency: CurrencyItem) {
+    _navigateToDetailAction.value = Event(currency.code)
+  }
+}
+
+interface CurrencyListEventListener {
+  fun onSelect(currency: CurrencyItem)
 }
