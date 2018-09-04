@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-    <data>
-        <variable
-            name="currency"
-            type="com.saryong.example.data.local.CurrencySetting" />
-    </data>
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/simple_currency_item_height"
-        >
+  <data>
+    <variable
+      name="parentViewModel"
+      type="com.saryong.example.presentation.addcurrency.AddCurrencyViewModel" />
+    <variable
+      name="currency"
+      type="com.saryong.example.data.local.CurrencySetting" />
+  </data>
 
-        <ImageView
-            android:id="@+id/flagImageView"
-            android:layout_width="@dimen/flag_thumbnail_image_size"
-            android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/description_flag_image"
-            app:imageAsset="@{currency.imagePath}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/simple_currency_item_height"
+    android:onClick="@{() -> parentViewModel.onClickItem(currency)}">
 
-        <TextView
-            android:id="@+id/currencyName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:text="@{currency.name}"
-            android:textSize="@dimen/item_title_text_size"
-            app:layout_constraintStart_toEndOf="@+id/flagImageView"
-            app:layout_constraintTop_toTopOf="@+id/flagImageView"
-            tools:text="Korean Won"
-            />
+    <ImageView
+      android:id="@+id/flagImageView"
+      android:layout_width="@dimen/flag_thumbnail_image_size"
+      android:layout_height="0dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:contentDescription="@string/description_flag_image"
+      app:imageAsset="@{currency.imagePath}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    <TextView
+      android:id="@+id/currencyName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      android:layout_marginTop="8dp"
+      android:text="@{currency.name}"
+      android:textSize="@dimen/item_title_text_size"
+      app:layout_constraintStart_toEndOf="@+id/flagImageView"
+      app:layout_constraintTop_toTopOf="@+id/flagImageView"
+      tools:text="Korean Won" />
+
+  </android.support.constraint.ConstraintLayout>
 </layout>

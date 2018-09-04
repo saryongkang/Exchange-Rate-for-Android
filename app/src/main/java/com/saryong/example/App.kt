@@ -58,6 +58,7 @@ open class App : DaggerApplication() {
 //    Preferences.firstLaunch = true
     
     if (Preferences.firstLaunch) {
+      Preferences.deleteAll()
       fillDefaultData()
 
       Preferences.firstLaunch = false
@@ -78,6 +79,7 @@ open class App : DaggerApplication() {
         .forEach { currency ->
           realm.createObject(CurrencyModel::class.java, currency.code).run {
             name = currency.name
+            order = currency.order
           }
           currencyList.add(currency.code)
         }

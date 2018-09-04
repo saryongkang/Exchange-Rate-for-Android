@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">Currencies</string>
-    <string name="action_settings">Settings</string>
+  <string name="app_name">Currencies</string>
+  <string name="action_settings">Settings</string>
 
-    <string name="title_activity_splash">SplashActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">CURRENCIES\nEXAMPLE</string>
-    <string name="description_flag_image">Flag Image</string>
+  <string name="dummy_content">CURRENCIES\nEXAMPLE</string>
+  <string name="description_flag_image">Flag Image</string>
+  <string name="title_activity_currency_detail">CurrencyDetailActivity</string>
 </resources>

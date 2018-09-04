@@ -1,5 +1,6 @@
 package com.saryong.example.presentation.currencylist
 
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -8,8 +9,8 @@ import android.os.Bundle
 import com.saryong.example.R
 import com.saryong.example.databinding.ActivityMainBinding
 import com.saryong.example.presentation.NavigationController
-import com.saryong.example.presentation.addcurrency.AddCurrencyActivity
 import com.saryong.example.util.fastLazy
+import com.saryong.example.util.livedata.EventObserver
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import javax.inject.Inject
@@ -38,9 +39,24 @@ class MainActivity : DaggerAppCompatActivity() {
     binding.fab.setOnClickListener {
       navigationController.navigateToAddCurrencyActivity()
     }
+    
+    viewModel.navigateToDetailActivity.observe(this, EventObserver {
+      navigationController.navigateToDetailActivity()
+    })
   }
-
-//  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+  
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    
+    if (resultCode == Activity.RESULT_OK && requestCode == NavigationController.ADD_CURRENCY_REQUEST_CODE) {
+      Timber.d(data?.getStringExtra(RESULT_KEY))
+      data?.getStringExtra(RESULT_KEY)?.let { currencyCode ->
+        viewModel.addCurrency(currencyCode)
+      }
+    }
+  }
+  
+  //  override fun onCreateOptionsMenu(menu: Menu): Boolean {
 //    // Inflate the menu; this adds items to the action bar if it is present.
 //    menuInflater.inflate(R.menu.menu_main, menu)
 //    return true
@@ -55,4 +71,8 @@ class MainActivity : DaggerAppCompatActivity() {
 //      else -> super.onOptionsItemSelected(item)
 //    }
 //  }
+  
+  companion object {
+    const val RESULT_KEY = "currency_code"
+  }
 }

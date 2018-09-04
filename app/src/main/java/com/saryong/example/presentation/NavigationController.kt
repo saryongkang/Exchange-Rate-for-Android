@@ -23,8 +23,12 @@ class NavigationController @Inject constructor(
   }
 
   fun navigateToAddCurrencyActivity() {
-    val intent = Intent(activity, AddCurrencyActivity::class.java)
-    activity.startActivity(intent)
+    val intent = Intent(activity.applicationContext, AddCurrencyActivity::class.java)
+    activity.startActivityForResult(intent, ADD_CURRENCY_REQUEST_CODE)
+  }
+  
+  fun navigateToDetailActivity() {
+    
   }
 
   private fun replaceFragment(fragment: Fragment) {
@@ -32,5 +36,9 @@ class NavigationController @Inject constructor(
       .beginTransaction()
       .replace(containerId, fragment, (fragment as? Findable)?.tagForFinding)
       .commitAllowingStateLoss()
+  }
+  
+  companion object {
+    const val ADD_CURRENCY_REQUEST_CODE = 0x0001
   }
 }
