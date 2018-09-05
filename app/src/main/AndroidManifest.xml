@@ -40,7 +40,6 @@
 
     <activity
       android:name=".presentation.currencydetail.CurrencyDetailActivity"
-      android:theme="@style/AppTheme.NoActionBar"
       android:parentActivityName=".presentation.currencylist.CurrencyListActivity">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"

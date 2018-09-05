@@ -15,7 +15,7 @@ open class CurrencyModel : RealmObject() {
   
   var name: String = ""
   var order: Int = -1
-  var exchangedAmount: Double = 0.0
+  var exchangedAmount: Double = 1.0
   var updatedAt: Long = 0 // LocalDateTime.now().toEpochSecond(getSystemZoneOffset())
   var status: Int = UpdateStatus.LOADING.rawValue
   
