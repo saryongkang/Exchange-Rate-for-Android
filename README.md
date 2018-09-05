@@ -1,7 +1,12 @@
 # Example Project for TransferWise
 Coded by Sa-ryong Kang
 
-## Clean Architecture
+## What I've made: Exchange Rate Viewer
+
+- Used API: Currency Layer
+http://currencylayer.com/
+
+## Philosophy: Clean Architecture
 
 ### Presentation Layer
 - View: Activity/Framework, XML with Data Binding
