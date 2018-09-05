@@ -1,7 +1,7 @@
 package com.saryong.example.data.repository
 
-import com.saryong.example.data.api.AlphaVantageApi
-import com.saryong.example.data.api.TransferWiseApi
+import android.support.annotation.CheckResult
+import com.saryong.example.data.api.CurrencyLayerApi
 import com.saryong.example.data.api.response.ExchangeRate
 import com.saryong.example.data.api.response.ExchangeRateTW
 import com.saryong.example.data.pref.Preferences
@@ -17,10 +17,10 @@ import javax.inject.Inject
 //  private val schedulerProvider: SchedulerProvider
 //) : ExchangeRateRepository {
 //
-//  override fun getExchangeRates(source: String): Observable<ExchangeRateTW> {
+//  override fun getAllExchangeRates(source: String): Observable<ExchangeRateTW> {
 //    val selectedCurrencies: Set<String> = Preferences.selectedCurrencies
 //
-//    return api.getExchangeRates(source)
+//    return api.getAllExchangeRates(source)
 //      .subscribeOn(schedulerProvider.io())
 //      .observeOn(schedulerProvider.io())
 //      .flatMapObservable {
@@ -32,12 +32,23 @@ import javax.inject.Inject
 //}
 
 class ExchangeRateDataRepository @Inject constructor(
-  private val api: AlphaVantageApi,
+  private val api: CurrencyLayerApi,
   private val schedulerProvider: SchedulerProvider
 ) : ExchangeRateRepository {
   
-  override fun getExchangeRates(source: String): Single<ExchangeRate> {
+  @CheckResult
+  override fun getAllExchangeRates(): Observable<ExchangeRate> {
+    val source = Preferences.baseCurrency
+    val callList = Preferences.selectedCurrencies.map { targetCode ->
+      api.getExchangeRate(source, targetCode)
+        .subscribeOn(schedulerProvider.io())
+    }
     
-    return api.getExchangeRate(source, "USD")
+    return Single.merge(callList).toObservable().observeOn(schedulerProvider.io())
   }
+  
+  @CheckResult
+  override fun getExchangeRate(source: String, target: String): Single<ExchangeRate> =
+    api.getExchangeRate(source, target)
+  
 }

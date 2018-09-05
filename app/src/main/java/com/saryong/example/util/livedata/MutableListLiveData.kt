@@ -2,7 +2,7 @@ package com.saryong.example.util.livedata
 
 import android.arch.lifecycle.LiveData
 
-open class MutableListLiveData<T>(private val list: MutableList<T> = mutableListOf()) :
+open class MutableListLiveData<T> (private val list: MutableList<T> = mutableListOf()) :
   MutableList<T> by list,
   LiveData<List<T>>() {
   

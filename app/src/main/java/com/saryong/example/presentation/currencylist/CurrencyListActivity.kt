@@ -1,48 +1,55 @@
 package com.saryong.example.presentation.currencylist
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import com.saryong.example.R
 import com.saryong.example.databinding.ActivityCurrencyListBinding
+import com.saryong.example.presentation.EXTRA_KEY_CURRENCY_CODE
 import com.saryong.example.presentation.NavigationController
 import com.saryong.example.presentation.REQUEST_CODE_ADD_CURRENCY
+import com.saryong.example.presentation.common.BaseActivity
 import com.saryong.example.util.fastLazy
 import com.saryong.example.util.livedata.EventObserver
-import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import javax.inject.Inject
 
-class CurrencyListActivity : DaggerAppCompatActivity() {
+class CurrencyListActivity : BaseActivity() {
   @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
   @Inject lateinit var navigationController: NavigationController
   
   private val binding: ActivityCurrencyListBinding by fastLazy {
     DataBindingUtil.setContentView<ActivityCurrencyListBinding>(this, R.layout.activity_currency_list)
   }
-
-  private val viewModel by fastLazy {
-    ViewModelProviders.of(this, viewModelFactory).get(CurrencyListViewModel::class.java)
-  }
+  
+  private lateinit var viewModel: CurrencyListViewModel
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
     setSupportActionBar(binding.toolbar)
+    viewModel = viewModelProvider(viewModelFactory)
 
     binding.setLifecycleOwner(this)
     binding.viewModel = viewModel
     binding.recyclerViewCurrencyList.adapter = CurrencyListAdapter(viewModel)
-
+  
     binding.fab.setOnClickListener {
       navigationController.navigateToAddCurrencyActivity()
     }
     
     viewModel.navigateToDetailAction.observe(this, EventObserver {
       navigationController.navigateToDetailActivity(it)
+    })
+    
+    viewModel.snackbarMessage.observe(this, Observer {
+      it?.let { message ->
+        Snackbar.make(currentFocus, message, Snackbar.LENGTH_LONG).show()
+      }
     })
   }
   
@@ -55,25 +62,5 @@ class CurrencyListActivity : DaggerAppCompatActivity() {
         viewModel.addCurrency(currencyCode)
       }
     }
-  }
-  
-  //  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//    // Inflate the menu; this adds items to the action bar if it is present.
-//    menuInflater.inflate(R.menu.menu_main, menu)
-//    return true
-//  }
-
-//  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//    // Handle action bar item clicks here. The action bar will
-//    // automatically handle clicks on the Home/Up button, so long
-//    // as you specify a parent activity in AndroidManifest.xml.
-//    return when (item.itemId) {
-//      R.id.action_settings -> true
-//      else -> super.onOptionsItemSelected(item)
-//    }
-//  }
-  
-  companion object {
-    const val EXTRA_KEY_CURRENCY_CODE = "EXTRA_KEY_CURRENCY_CODE"
   }
 }

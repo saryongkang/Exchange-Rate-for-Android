@@ -9,5 +9,5 @@ annotation class NetworkLogger
 annotation class RetrofitTransferWise
 
 @Qualifier
-annotation class RetrofitAlphaVantage
+annotation class RetrofitCurrencyLayer
 

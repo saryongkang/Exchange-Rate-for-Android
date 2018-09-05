@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 const val EXTRA_KEY_CURRENCY_CODE = "EXTRA_KEY_CURRENCY_CODE"
 const val REQUEST_CODE_ADD_CURRENCY = 0x0001
+const val REQUEST_CODE_BASE_AMOUNT = 0x0002
 
 class NavigationController @Inject constructor(
   private val activity: AppCompatActivity

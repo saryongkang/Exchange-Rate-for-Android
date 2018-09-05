@@ -3,15 +3,128 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:bind="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  tools:context="com.saryong.example.presentation.currencydetail.CurrencyDetailFragment"
-  tools:showIn="@layout/activity_currency_detail">
+  >
 
   <data>
+    <variable
+      name="viewModel"
+      type="com.saryong.example.presentation.currencydetail.CurrencyDetailViewModel" />
   </data>
 
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+      android:id="@+id/sourceCurrencyText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      android:layout_marginTop="8dp"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="Korean Won (KRW)" />
+
+    <TextView
+      android:id="@+id/targetCurrencyText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      android:layout_marginTop="24dp"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/convertButton"
+      tools:text="Japanese Yen (JPY)" />
+
+    <EditText
+      android:id="@+id/amountEditText"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:ems="10"
+      android:inputType="numberDecimal"
+      android:onTextChanged="@{viewModel::onDigitChanged}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/sourceCurrencyText"
+      />
+
+    <Button
+      android:id="@+id/convertButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      android:text="Convert"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/amountEditText" />
+
+    <TextView
+      android:id="@+id/resultText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:text="@{viewModel.exchangeResult}"
+      android:textSize="24sp"
+      app:layout_constraintStart_toStartOf="@+id/targetCurrencyText"
+      app:layout_constraintTop_toBottomOf="@+id/targetCurrencyText"
+      tools:text="¥ 1000.0" />
+
+    <TextView
+      android:id="@+id/amountWithSymbol"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:text="@{viewModel.sourceAmountText}"
+      app:layout_constraintStart_toStartOf="@+id/amountEditText"
+      app:layout_constraintTop_toBottomOf="@+id/amountEditText"
+      tools:text="₩ 100.0" />
+
+    <TextView
+      android:id="@+id/textView3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="64dp"
+      android:text="Exchange Rate: "
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/resultText" />
+
+    <TextView
+      android:id="@+id/exchangeRateText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      android:text="TextView"
+      app:layout_constraintStart_toEndOf="@+id/textView3"
+      app:layout_constraintTop_toTopOf="@+id/textView3"
+      tools:text="10.0" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="Updated at:"
+      app:layout_constraintStart_toStartOf="@+id/textView3"
+      app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+      android:id="@+id/updatedDatetimeText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="TextView"
+      app:layout_constraintStart_toStartOf="@+id/exchangeRateText"
+      app:layout_constraintTop_toBottomOf="@+id/exchangeRateText"
+      tools:text="5 September, 2018 20:00:00" />
 
   </android.support.constraint.ConstraintLayout>
 </layout>

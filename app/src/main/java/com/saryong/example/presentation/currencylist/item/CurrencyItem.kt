@@ -1,5 +1,6 @@
 package com.saryong.example.presentation.currencylist.item
 
+import com.saryong.example.data.model.CurrencyModel
 import org.threeten.bp.LocalDateTime
 
 enum class UpdateStatus(val rawValue: Int) {
@@ -20,10 +21,18 @@ enum class UpdateStatus(val rawValue: Int) {
 data class CurrencyItem(
   val code: String,
   val name: String,
-  val exchangedAmount: String = "0.0",
-  val updatedAt: LocalDateTime = LocalDateTime.now(),
+  val exchangeRate: Double = 0.0,
+  val updatedAt: String = "",
   val status: UpdateStatus = UpdateStatus.LOADING
 ) {
   val imagePath: String
     get() = code.toLowerCase() + ".png"
+  
+  val longName: String
+    get() = "$name ($code)"
+  
+  val exchangeRateString: String
+    get() = exchangeRate.toString()
+  
+  
 }

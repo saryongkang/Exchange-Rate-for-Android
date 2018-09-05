@@ -1,6 +1,6 @@
 package com.saryong.example.di.activitymodule
 
-import com.saryong.example.presentation.splash.SplashActivity
+import com.saryong.example.presentation.splash.not.used.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

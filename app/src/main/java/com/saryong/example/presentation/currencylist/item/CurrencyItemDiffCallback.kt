@@ -14,5 +14,5 @@ class CurrencyItemDiffCallback(
     oldList[oldItemPosition].code == newList[newItemPosition].code
   
   override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-    oldList[oldItemPosition].exchangedAmount == newList[newItemPosition].exchangedAmount
+    oldList[oldItemPosition].exchangeRate == newList[newItemPosition].exchangeRate
 }
