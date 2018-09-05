@@ -8,30 +8,32 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.saryong.example.R
 import com.saryong.example.databinding.ActivityCurrencyListBinding
+import com.saryong.example.presentation.EXTRA_KEY_CURRENCY_CODE
 import com.saryong.example.presentation.NavigationController
 import com.saryong.example.presentation.REQUEST_CODE_ADD_CURRENCY
+import com.saryong.example.presentation.common.BaseActivity
+import com.saryong.example.util.extention.viewModelProvider
 import com.saryong.example.util.fastLazy
 import com.saryong.example.util.livedata.EventObserver
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import javax.inject.Inject
 
-class CurrencyListActivity : DaggerAppCompatActivity() {
+class CurrencyListActivity : BaseActivity() {
   @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
   @Inject lateinit var navigationController: NavigationController
   
   private val binding: ActivityCurrencyListBinding by fastLazy {
     DataBindingUtil.setContentView<ActivityCurrencyListBinding>(this, R.layout.activity_currency_list)
   }
-
-  private val viewModel by fastLazy {
-    ViewModelProviders.of(this, viewModelFactory).get(CurrencyListViewModel::class.java)
-  }
+  
+  private lateinit var viewModel: CurrencyListViewModel
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
     setSupportActionBar(binding.toolbar)
+    viewModel = viewModelProvider(viewModelFactory)
 
     binding.setLifecycleOwner(this)
     binding.viewModel = viewModel
@@ -72,8 +74,4 @@ class CurrencyListActivity : DaggerAppCompatActivity() {
 //      else -> super.onOptionsItemSelected(item)
 //    }
 //  }
-  
-  companion object {
-    const val EXTRA_KEY_CURRENCY_CODE = "EXTRA_KEY_CURRENCY_CODE"
-  }
 }

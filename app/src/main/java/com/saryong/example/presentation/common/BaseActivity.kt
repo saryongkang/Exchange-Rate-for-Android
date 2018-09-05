@@ -2,6 +2,9 @@ package com.saryong.example.presentation.common
 
 import android.annotation.SuppressLint
 import android.app.ActivityManager
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +18,9 @@ open class BaseActivity : DaggerAppCompatActivity() {
     super.onCreate(savedInstanceState)
     initTaskDescription()
   }
+  
+  protected inline fun <reified VM : ViewModel> viewModelProvider(provider: ViewModelProvider.Factory) =
+    ViewModelProviders.of(this, provider).get(VM::class.java)
 
   private fun initTaskDescription() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
