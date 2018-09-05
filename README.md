@@ -33,6 +33,10 @@ http://currencylayer.com/
 - Robolectric
 - Mockito
 
+## How to install:
 
+Nothing special!
+This project was developed by Android Studio 3.1.4. and no another setting is required.
 
-    
+## Known Problem
+To run unit test for [CurrencyListViewModel], you need to comment 1 line on init method.
