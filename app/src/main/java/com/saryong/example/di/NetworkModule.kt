@@ -1,13 +1,11 @@
 package com.saryong.example.di
 
-import com.saryong.example.data.api.AlphaVantageApi
-import com.saryong.example.data.api.TransferWiseApi
+import com.saryong.example.data.api.CurrencyLayerApi
 import com.saryong.example.data.api.response.mapper.ApplicationJsonAdapterFactory
 import com.saryong.example.data.api.response.mapper.InstantAdapter
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.threeten.bp.Instant
@@ -24,17 +22,17 @@ open class NetworkModule {
     val instance = NetworkModule()
   }
   
-  @RetrofitAlphaVantage @Singleton @Provides
+  @RetrofitCurrencyLayer @Singleton @Provides
   fun provideOkHttpClient(@NetworkLogger loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
     OkHttpClient.Builder()
       .addNetworkInterceptor(loggingInterceptor)
       .build()
   
-  @RetrofitAlphaVantage @Singleton @Provides
-  fun provideRetrofit(@RetrofitAlphaVantage okHttpClient: OkHttpClient): Retrofit =
+  @RetrofitCurrencyLayer @Singleton @Provides
+  fun provideRetrofit(@RetrofitCurrencyLayer okHttpClient: OkHttpClient): Retrofit =
     Retrofit.Builder()
       .client(okHttpClient)
-      .baseUrl("https://www.alphavantage.co")
+      .baseUrl("http://apilayer.net")
       .addConverterFactory(
         MoshiConverterFactory.create(Moshi.Builder()
           .add(ApplicationJsonAdapterFactory.INSTANCE)
@@ -48,6 +46,6 @@ open class NetworkModule {
 //    retrofit.create(TransferWiseApi::class.java)
   
   @Singleton @Provides
-  open fun provideAlphaVantageApi(@RetrofitAlphaVantage retrofit: Retrofit): AlphaVantageApi =
-    retrofit.create(AlphaVantageApi::class.java)
+  open fun provideCurrencyLayerApi(@RetrofitCurrencyLayer retrofit: Retrofit): CurrencyLayerApi =
+    retrofit.create(CurrencyLayerApi::class.java)
 }

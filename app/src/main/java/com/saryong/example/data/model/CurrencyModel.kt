@@ -15,16 +15,23 @@ open class CurrencyModel : RealmObject() {
   
   var name: String = ""
   var order: Int = -1
-  var exchangedAmount: Double = 1.0
-  var updatedAt: Long = 0 // LocalDateTime.now().toEpochSecond(getSystemZoneOffset())
+  var exchangeRate: Double = 1.0
+  var updatedAt: Long = 0L // LocalDateTime.now().toEpochSecond(getSystemZoneOffset())
   var status: Int = UpdateStatus.LOADING.rawValue
+  
+  val updatedDatetimeString: String
+    get() = if (updatedAt == 0L) {
+      "not updated yet"
+    } else {
+      "" // LocalDateTime.ofEpochSecond()
+    }
   
   fun toViewEntity() =
     CurrencyItem(
       code = code,
       name = name,
-      exchangedAmount = exchangedAmount.toString(),
-//      updatedAt = LocalDateTime.ofEpochSecond(updatedAt, 0, getSystemZoneOffset()),
+      exchangedAmount = exchangeRate.toString(),
+      updatedAt = updatedDatetimeString,
       status = UpdateStatus.valueOf(status)
     )
 }

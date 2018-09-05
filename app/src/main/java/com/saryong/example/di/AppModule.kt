@@ -2,7 +2,7 @@ package com.saryong.example.di
 
 import android.content.Context
 import com.saryong.example.App
-import com.saryong.example.data.api.AlphaVantageApi
+import com.saryong.example.data.api.CurrencyLayerApi
 import com.saryong.example.data.local.PredefinedConstantDataStorage
 import com.saryong.example.data.local.PredefinedConstantStorage
 import com.saryong.example.data.repository.ExchangeRateDataRepository
@@ -27,7 +27,7 @@ internal object AppModule {
   
   @Singleton @Provides @JvmStatic
   fun provideExchangeRateRepository(
-    exchangeApi: AlphaVantageApi,
+    exchangeApi: CurrencyLayerApi,
     schedulerProvider: SchedulerProvider
   ) : ExchangeRateRepository =
     ExchangeRateDataRepository(exchangeApi, schedulerProvider)

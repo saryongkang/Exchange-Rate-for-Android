@@ -2,14 +2,10 @@ package com.saryong.example.presentation.currencydetail
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Observer
-import android.databinding.ObservableField
-import android.support.design.widget.Snackbar
 import com.saryong.example.data.local.CurrencySetting
 import com.saryong.example.data.local.PredefinedConstantStorage
 import com.saryong.example.data.model.CurrencyModel
 import com.saryong.example.data.pref.Preferences
-import com.saryong.example.presentation.EXTRA_KEY_CURRENCY_CODE
 import com.saryong.example.presentation.common.BaseViewModel
 import com.saryong.example.util.livedata.Event
 import com.saryong.example.util.rx.toLiveData
@@ -60,7 +56,7 @@ class CurrencyDetailViewModel @Inject constructor(
     targetCurrency = flowable.toLiveData()
     
     disposables += flowable.subscribe {
-      Timber.d("Good: " + it.exchangedAmount)
+      Timber.d("Good: " + it.exchangeRate)
     }
       
   }
@@ -70,7 +66,7 @@ class CurrencyDetailViewModel @Inject constructor(
     
     s.toString().toDoubleOrNull()?.let { amount ->
       targetCurrency.value?.let {
-        val result: Double = amount * it.exchangedAmount
+        val result: Double = amount * it.exchangeRate
         exchangeResult.postValue(result.toString())
         
   

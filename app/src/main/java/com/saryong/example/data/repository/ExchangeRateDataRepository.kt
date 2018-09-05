@@ -1,7 +1,6 @@
 package com.saryong.example.data.repository
 
-import com.saryong.example.data.api.AlphaVantageApi
-import com.saryong.example.data.api.TransferWiseApi
+import com.saryong.example.data.api.CurrencyLayerApi
 import com.saryong.example.data.api.response.ExchangeRate
 import com.saryong.example.data.api.response.ExchangeRateTW
 import com.saryong.example.data.pref.Preferences
@@ -32,12 +31,17 @@ import javax.inject.Inject
 //}
 
 class ExchangeRateDataRepository @Inject constructor(
-  private val api: AlphaVantageApi,
+  private val api: CurrencyLayerApi,
   private val schedulerProvider: SchedulerProvider
 ) : ExchangeRateRepository {
   
-  override fun getExchangeRates(source: String): Single<ExchangeRate> {
+  override fun getExchangeRates(): Observable<ExchangeRate> {
+    val source = Preferences.baseCurrency
+    val callList = Preferences.selectedCurrencies.map { targetCode ->
+      api.getExchangeRate(source, targetCode)
+        .subscribeOn(schedulerProvider.io())
+    }
     
-    return api.getExchangeRate(source, "USD")
+    return Single.merge(callList).toObservable().observeOn(schedulerProvider.io())
   }
 }

@@ -2,7 +2,6 @@ package com.saryong.example.presentation.currencydetail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +43,7 @@ class CurrencyDetailFragment : DaggerFragment() {
       viewModel.targetCurrency.observe(this, Observer { currency ->
         currency?.let {
           binding.targetCurrencyText.text = longNameFor(it)
-          binding.exchangeRateText.text = it.exchangedAmount.toString()
+          binding.exchangeRateText.text = it.exchangeRate.toString()
           binding.updatedDatetimeText.text = it.updatedAt.toString()
         }
       })

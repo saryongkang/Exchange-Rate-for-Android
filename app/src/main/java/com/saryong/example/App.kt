@@ -14,6 +14,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.kotlin.createObject
 
 @SuppressLint("Registered")
 open class App : DaggerApplication() {
@@ -55,7 +56,7 @@ open class App : DaggerApplication() {
   // TODO: move this to Splash screen
   private fun initGlobal() {
     // FIXME TEMP
-//    Preferences.firstLaunch = true
+    Preferences.firstLaunch = true
     
     if (Preferences.firstLaunch) {
       Preferences.deleteAll()
@@ -77,7 +78,7 @@ open class App : DaggerApplication() {
 
       storage.currencies.filter { it.code != baseCurrency }.sortedBy { it.order }.take(10)
         .forEach { currency ->
-          realm.createObject(CurrencyModel::class.java, currency.code).run {
+          realm.createObject<CurrencyModel>(currency.code).run {
             name = currency.name
             order = currency.order
           }

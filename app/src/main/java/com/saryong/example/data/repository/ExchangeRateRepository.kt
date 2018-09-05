@@ -7,5 +7,5 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 interface ExchangeRateRepository {
-  @CheckResult fun getExchangeRates(source: String): Single<ExchangeRate>
+  @CheckResult fun getExchangeRates(): Observable<ExchangeRate>
 }

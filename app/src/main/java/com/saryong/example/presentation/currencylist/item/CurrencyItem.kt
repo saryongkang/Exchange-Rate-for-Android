@@ -21,7 +21,7 @@ data class CurrencyItem(
   val code: String,
   val name: String,
   val exchangedAmount: String = "0.0",
-  val updatedAt: LocalDateTime = LocalDateTime.now(),
+  val updatedAt: String = "",
   val status: UpdateStatus = UpdateStatus.LOADING
 ) {
   val imagePath: String
