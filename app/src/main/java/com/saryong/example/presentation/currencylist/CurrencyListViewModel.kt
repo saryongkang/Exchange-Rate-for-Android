@@ -3,6 +3,7 @@ package com.saryong.example.presentation.currencylist
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableArrayList
+import com.saryong.example.BuildConfig
 import com.saryong.example.data.local.PredefinedConstantStorage
 import com.saryong.example.data.pref.Preferences
 import com.saryong.example.domain.AddCurrencyUseCase
@@ -33,12 +34,13 @@ class CurrencyListViewModel @Inject constructor(
   private val _snackbarMessage = MutableLiveData<String>()
   val snackbarMessage: LiveData<String>
     get() = _snackbarMessage
-
+  
   init {
     val currentCurrency = Preferences.baseCurrency
   
     val codeList = predefinedConstantStorage.currencies
       .filter { it.code != currentCurrency }
+      .sortedBy { it.order }
       .map { it.code }
       .toMutableList()
   
@@ -47,15 +49,16 @@ class CurrencyListViewModel @Inject constructor(
   
     currencyList = loadAllCurrenciesUseCase(Unit)
   
-    disposables += updateAllCurrenciesUseCase.executeDirectly(Unit)
-  }
-  
-  fun addCurrency(currencyCode: String) {
-    disposables += addCurrencyUseCase.executeDirectly(currencyCode)
+    disposables += // FIXME NPE when execute test case
+      updateAllCurrenciesUseCase.executeDirectly(Unit)
   }
   
   override fun onSelect(currency: CurrencyItem) {
     _navigateToDetailAction.value = Event(currency.code)
+  }
+  
+  fun addCurrency(currencyCode: String) {
+    disposables += addCurrencyUseCase.executeDirectly(currencyCode)
   }
   
   fun onChangeBaseCurrency(position: Int) {

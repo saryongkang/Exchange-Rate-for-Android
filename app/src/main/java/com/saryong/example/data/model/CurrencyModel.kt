@@ -9,8 +9,8 @@ import org.threeten.bp.Instant
 open class CurrencyModel : RealmObject() {
   @PrimaryKey
   var code: String = ""
-  
   var name: String = ""
+  var symbol: String = ""
   var order: Int = -1
   var exchangeRate: Double = 1.0
   var updatedAt: Long = 0L
@@ -27,6 +27,7 @@ open class CurrencyModel : RealmObject() {
     CurrencyItem(
       code = code,
       name = name,
+      symbol = symbol,
       exchangeRate = exchangeRate,
       updatedAt = updatedDatetimeString,
       status = UpdateStatus.valueOf(status)

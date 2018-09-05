@@ -79,6 +79,7 @@ open class App : DaggerApplication() {
         .forEach { currency ->
           realm.createObject<CurrencyModel>(currency.code).run {
             name = currency.name
+            symbol = currency.symbol
             order = currency.order
           }
           currencyList.add(currency.code)
