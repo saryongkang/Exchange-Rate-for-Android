@@ -13,5 +13,5 @@ data class CurrencySetting(
   val imagePath: String
     get() = code.toLowerCase() + ".png"
   
-  fun toCurrencyItem() = CurrencyItem(code, name)
+  fun toCurrencyItem() = CurrencyItem(code, name, symbol)
 }

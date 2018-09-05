@@ -53,7 +53,7 @@ class CurrencyDetailViewModel @Inject constructor(
     s.toString().toDoubleOrNull()?.let { amount ->
       targetCurrency.value?.let {
         val result: Double = amount * it.exchangeRate
-        exchangeResult.postValue(result.toString())
+        exchangeResult.postValue(it.symbol + result.toString())
       }
     }
   }
