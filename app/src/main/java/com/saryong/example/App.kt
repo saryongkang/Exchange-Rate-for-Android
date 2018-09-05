@@ -55,8 +55,7 @@ open class App : DaggerApplication() {
   
   // TODO: move this to Splash screen
   private fun initGlobal() {
-    // FIXME TEMP
-    Preferences.firstLaunch = true
+//    Preferences.firstLaunch = true
     
     if (Preferences.firstLaunch) {
       Preferences.deleteAll()
@@ -88,4 +87,6 @@ open class App : DaggerApplication() {
     
     Preferences.selectedCurrencies.addAll(currencyList)
   }
+  
+  protected open fun isInUnitTests() = false
 }

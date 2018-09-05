@@ -3,6 +3,7 @@ package com.saryong.example.presentation.currencydetail
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +35,15 @@ class CurrencyDetailFragment : DaggerFragment() {
     viewModel.initAction.observe(this, EventObserver {
       bindCurrencySettings(it)
     })
-    
+  
+    viewModel.snackbarMessage.observe(this, Observer {
+      it?.let { message ->
+        if (view != null) {
+          Snackbar.make(view!!, message, Snackbar.LENGTH_LONG).show()
+        }
+      }
+    })
+  
     if (savedInstanceState == null) {
       arguments?.getString(ARG_TARGET_CURRENCY)?.let {
         viewModel.init(it)
@@ -42,9 +51,9 @@ class CurrencyDetailFragment : DaggerFragment() {
       
       viewModel.targetCurrency.observe(this, Observer { currency ->
         currency?.let {
-          binding.targetCurrencyText.text = longNameFor(it)
+          binding.targetCurrencyText.text = it.longName
           binding.exchangeRateText.text = it.exchangeRate.toString()
-          binding.updatedDatetimeText.text = it.updatedAt.toString()
+          binding.updatedDatetimeText.text = it.updatedAt
         }
       })
     }
@@ -58,9 +67,6 @@ class CurrencyDetailFragment : DaggerFragment() {
   private fun bindCurrencySettings(source: CurrencySetting) {
     binding.sourceCurrencyText.text = longNameFor(source)
   }
-  
-  private fun longNameFor(currency: CurrencyModel) =
-    "${currency.name} (${currency.code})"
   
   private fun longNameFor(currency: CurrencySetting) =
     "${currency.name} (${currency.code})"

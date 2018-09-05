@@ -1,4 +1,4 @@
-package com.saryong.example.presentation.splash
+package com.saryong.example.presentation.splash.not.used
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -56,7 +56,8 @@ class SplashActivity : DaggerAppCompatActivity() {
     setContentView(layout.activity_splash)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-    startupTask = StartupTask(WeakReference(this))
+    startupTask =
+      StartupTask(WeakReference(this))
     startupTask?.execute()
   }
 
@@ -79,7 +80,9 @@ class SplashActivity : DaggerAppCompatActivity() {
     supportActionBar?.hide()
 
     // Schedule a runnable to remove the status and navigation bar after a delay
-    hideHandler.postDelayed(hidePart2Runnable, UI_ANIMATION_DELAY)
+    hideHandler.postDelayed(hidePart2Runnable,
+      UI_ANIMATION_DELAY
+    )
   }
 
   private fun delayedHide(delayMillis: Long) {

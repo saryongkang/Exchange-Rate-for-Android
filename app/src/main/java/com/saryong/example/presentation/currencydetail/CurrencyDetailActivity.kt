@@ -17,11 +17,10 @@ class CurrencyDetailActivity : DaggerAppCompatActivity() {
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    //setSupportActionBar(binding.toolbar)
-  
-    binding
     
     supportActionBar?.title = "Currency Converter"
+    
+    binding
   
     if (savedInstanceState == null) {
       val targetCode = intent.getStringExtra(EXTRA_KEY_CURRENCY_CODE)
