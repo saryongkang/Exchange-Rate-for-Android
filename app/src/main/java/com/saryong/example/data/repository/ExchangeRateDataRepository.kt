@@ -44,7 +44,7 @@ class ExchangeRateDataRepository @Inject constructor(
         .subscribeOn(schedulerProvider.io())
     }
     
-    return Single.merge(callList).toObservable().observeOn(schedulerProvider.io())
+    return Single.merge(callList).toObservable().subscribeOn(schedulerProvider.io())
   }
   
   @CheckResult
