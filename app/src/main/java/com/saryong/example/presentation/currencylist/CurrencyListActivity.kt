@@ -13,6 +13,7 @@ import com.saryong.example.presentation.EXTRA_KEY_CURRENCY_CODE
 import com.saryong.example.presentation.NavigationController
 import com.saryong.example.presentation.REQUEST_CODE_ADD_CURRENCY
 import com.saryong.example.presentation.common.BaseActivity
+import com.saryong.example.util.extention.isNetworkConnected
 import com.saryong.example.util.fastLazy
 import com.saryong.example.util.livedata.EventObserver
 import timber.log.Timber
@@ -51,6 +52,12 @@ class CurrencyListActivity : BaseActivity() {
         Snackbar.make(currentFocus, message, Snackbar.LENGTH_LONG).show()
       }
     })
+    
+    if (applicationContext.isNetworkConnected()) {
+      viewModel.networkAvailability.onNext(true)
+    } else {
+      // TODO make loop to check if network is connected, using HandlerThread or coroutine
+    }
   }
   
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
