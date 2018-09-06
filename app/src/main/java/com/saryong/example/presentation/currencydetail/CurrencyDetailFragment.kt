@@ -2,6 +2,7 @@ package com.saryong.example.presentation.currencydetail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
@@ -16,6 +17,10 @@ import com.saryong.example.util.fastLazy
 import com.saryong.example.util.livedata.EventObserver
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.inputmethod.InputMethodManager
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -60,6 +65,9 @@ class CurrencyDetailFragment : DaggerFragment() {
     
     binding.setLifecycleOwner(this)
     binding.viewModel = viewModel
+    binding.containerLayout.setOnClickListener {
+      hideKeyboard(it)
+    }
     
     return binding.root
   }
@@ -70,6 +78,11 @@ class CurrencyDetailFragment : DaggerFragment() {
   
   private fun longNameFor(currency: CurrencySetting) =
     "${currency.name} (${currency.code})"
+  
+  private fun hideKeyboard(view: View) {
+    val manager = context?.applicationContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    manager?.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+  }
   
   companion object {
     private const val ARG_TARGET_CURRENCY = "arg.TARGET_CURRENCY"
