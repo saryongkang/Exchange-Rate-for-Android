@@ -2,8 +2,10 @@ package com.saryong.example.domain
 
 import com.saryong.example.data.repository.CurrencyInfoRepository
 import com.saryong.example.data.repository.ExchangeRateRepository
+import com.saryong.example.util.defaultErrorHandler
 import com.saryong.example.util.rx.SchedulerProvider
 import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 open class UpdateAllCurrenciesUseCase @Inject constructor(
@@ -15,8 +17,11 @@ open class UpdateAllCurrenciesUseCase @Inject constructor(
   override fun executeDirectly(param: Unit): Disposable {
     return exchangeRateRepository.getAllExchangeRates()
       .observeOn(schedulerProvider.io())
-      .subscribe { rate ->
-        currencyInfoRepository.updateCurrencyModel(rate)
-      }
+      .subscribeBy(
+        onNext = { rate ->
+          currencyInfoRepository.updateCurrencyModel(rate)
+        },
+        onError = defaultErrorHandler()
+      )
   }
 }
