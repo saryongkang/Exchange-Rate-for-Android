@@ -1,4 +1,4 @@
-# Example Project for TransferWise
+# Android Example app to present MVVM, Clean Architecture, Dependency Inject, etc.
 Coded by Sa-ryong Kang
 
 ## What I've made: Exchange Rate Viewer
